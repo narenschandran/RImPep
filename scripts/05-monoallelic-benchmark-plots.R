@@ -137,21 +137,3 @@ hist(
 )
 dev.off()
 }
-
-s <- local({
-    tmp <- dat_lst[["model-txx-0c57412b"]]$pred[,c("tpm", "pred")]
-    tmp$pred <- round(tmp$pred, 3)
-    unique(tmp)
-})
-s <- s[order(s$pred),]
-
-plot(log1p(s$tpm), s$pred)
-
-v <- local({
-    tmp <- dat_lst[["model-xsx-21f3f3c6"]]$pred[,c("gene", "pred")]
-    tmp$pred <- round(tmp$pred, 3)
-    unique(tmp)
-})
-v <- v[order(v$pred),]
-
-
