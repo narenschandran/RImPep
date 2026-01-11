@@ -36,7 +36,7 @@ conda env activate tinyhlanet
 
 If this command works, your bash prompt should have changed to begin with `(tinyhlanet)`, and you're all good to test out RImPep!
 
-If you want to setup the environment yourself using venv, you can check the `requirements.txt` file given in `bin/TinyHLAnet/prereq' directory instead.
+If you want to setup the environment yourself using venv, you can check the `requirements.txt` file given in `bin/TinyHLAnet/prereq` directory instead.
 
 ## Quick start guide
 
@@ -58,7 +58,7 @@ bash run.sh example/sample-input mtechi
 The predictions from this run will be placed in the same input folder. The two main outputs you would need to pay attention to are `potentially-reactive-eptiopes.tsv` and `epitopes.tsv`. These files contain the peptides from the reactive immunopeptidome and the full immunopeptidome respectively, and can be used for further analysis.
 
 
-### Repository organization
+## Repository organization
 This repository contains the code and data required to train and benchmark the `P-model` and also for executing the full RImPep pipeline. The files/directories that come with this repository include:
 
 ```
