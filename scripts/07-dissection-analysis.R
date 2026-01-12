@@ -145,10 +145,10 @@ pheatmap(
 dev.off()
 }
 
-subclocs <- colnames(score_mat)[-1]
+subclocs <- setdiff(colnames(score_mat)[-1], "Plastid")
 {
 svg(file.path(PLOTS_DIR, 'seq-dissection-deeploc-quartile.svg'))
-par(mfrow = c(4, 4), cex = 0.5, mar = c(3, 3, 2, 2))
+par(mfrow = c(4, 3), cex = 0.5, mar = c(3, 3, 2, 2))
 for (subcloc in subclocs) {
 procfn <- identity
 sp <- lapply(split(score_df[[subcloc]], score_df$quartile), procfn)
