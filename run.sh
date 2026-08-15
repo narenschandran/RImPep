@@ -115,6 +115,12 @@ if [ ! -f "$MTECHI_TPM" ]; then
 fi
 
 
+ENSP2ENSG_MAP="${PREREQ_DIR}/ensp2ensg.tsv"
+if [ ! -f "$ENSP2ENSG_MAP" ]; then
+    err_echo "Unable to find the ENSP-to-ENSG map profile at: [${ENSP2ENSG_MAP}]"
+    QUITPRG=11
+fi
+
 
 if [ ! -z "$QUITPRG" ]; then
     echo "$QUITPRG"
@@ -254,7 +260,16 @@ if [ -f "$mut_f" ]; then
     x <- data.frame(
         gene = readLines('${mut_genes_f}')
     )
-    x[['orig_gene']] <- sapply(strsplit(x[['gene']], '[:]'), '[[', 1)
+
+    if (all(grepl('^ENSP', x[['gene']]))) {
+        ptmp <- sub('[.][0-9]+$', '', sapply(strsplit(x[['gene']], '[:]'), '[[', 1))
+        map <- read.table('${ENSP2ENSG_MAP}', sep = '\t', header = T)
+        gmap <- map[match(ptmp, map[['protein_id']]), 'gene_id']
+        gmap[is.na(gmap)] <- 'UNK'
+        x[['orig_gene']] <- gmap
+    } else {
+        x[['orig_gene']] <- sapply(strsplit(x[['gene']], '[:]'), '[[', 1)
+    }
     tpm <- read.table('${tpm_f}', sep = '\t', header = T, stringsAsFactors = F, quote = '')
 
     common_genes <- sort(intersect(tpm[['gene']], x[['orig_gene']]))
