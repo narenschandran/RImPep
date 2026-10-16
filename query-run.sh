@@ -224,7 +224,7 @@ if [ ! -z "$MISSING_ALLELES" ]; then
     "$PSCAN" -a 0.2 -b 0.5 -l <(echo "$MISSING_ALLELES" | sed 's/ /\n/g') -o "$HLA_SCAN_DIR" "$REF_FASTA" 
 fi
 
-# "$PSCAN" -a 0.2 -b 0.5 -l "$al_lst" -o "${sample_dir}/hla-scan" "$query_fa"
+"$PSCAN" -a 0.2 -b 0.5 -l "$al_lst" -o "${sample_dir}/hla-scan" "$query_fa"
  
 Rscript "$EPI_EXTRACT_2" -E "${sample_dir}/hla-scan/epitopes/aff0.2_bind0.5" -S "$sample_dir"
 mtechi_tmp_dir="${sample_dir}/thymus"
